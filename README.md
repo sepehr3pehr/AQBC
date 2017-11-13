@@ -1,6 +1,7 @@
 # AQBC
 Angular Quantization-based Binary Codes
-This is the Python implementation of Angular Quantization-based Binary Codes (AQBC) proposed in [1].
+
+This is the Python implementation of Angular Quantization-based Binary Codes (AQBC) proposed in [1]. Define the learning, base and query set in learner.py and run it with python learner.py.
 
 
 
