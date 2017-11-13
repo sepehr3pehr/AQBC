@@ -23,8 +23,6 @@ class AQBC:
 		self.obj = 0
 		for i in range(self.n):
 			self.obj += BNormalized[:, i].T.dot(RX[:, i])
-		#self.obj = np.trace(BNormalized.T.dot(self.R.T.dot(self.X)))
-		#self.obj = Qobj
 
 	def optimize_B(self):
 		B = np.zeros((self.nbits, self.n))
@@ -33,8 +31,6 @@ class AQBC:
 			args_sort = np.argsort(RX[:, i].T)
 			args_sort = args_sort[::-1]
 			best_psi = -1 * np.inf
-			#if(i% 10000==0):
-				#print("at optmizing binary_v {}".format(i))
 			for k in range(self.nbits):
 				if(RX[args_sort[k], i] == 0):
 					break
@@ -58,10 +54,7 @@ class AQBC:
 		for i in range(self.epochs):
 			print("iteration {}".format(i))
 			self.optimize_R()
-			#print("R optimized")
 			self.optimize_B()
-			#print("B optimized")
-		
 			if i%2 == 0:
 				self.objective()
 				print("obj @ {} is {}".format(i, self.obj))
@@ -73,8 +66,6 @@ class AQBC:
 			args_sort = np.argsort(RX[:, i].T)
 			args_sort = args_sort[::-1]
 			best_psi = -1 * np.inf
-			#if(i% 10000==0):
-				#print("at optmizing binary_v {}".format(i))
 			for k in range(self.nbits):
 				if(RX[args_sort[k], i] == 0):
 					break
@@ -96,8 +87,6 @@ def hasher(R, nbits, X):
 		args_sort = np.argsort(RX[:, i].T)
 		args_sort = args_sort[::-1]
 		best_psi = -1 * np.inf
-		#if(i% 10000==0):
-			#print("at optmizing binary_v {}".format(i))
 		for k in range(nbits):
 			if(RX[args_sort[k], i] == 0):
 				break
@@ -111,53 +100,3 @@ def hasher(R, nbits, X):
 				best_psi = psi
 		B_out[:, i] = best_b_i
 	return B_out
-'''
-
-B_out = np.random.randint(2, size=(64, X.shape[1]))
-RX = R.T.dot(X)
-for i in range(9999,10000):
-	args_sort = np.argsort(RX[:, i].T)
-	args_sort = args_sort[::-1]
-	best_psi = -1 * np.inf
-	#if(i% 10000==0):
-		#print("at optmizing binary_v {}".format(i))
-	for k in range(64):
-		if(RX[args_sort[k], i] == 0):
-			break
-		b_i = np.zeros((1, 64))
-		b_i[:, args_sort[:k+1]] = 1
-		psi = RX[:, i].T.dot(np.squeeze(b_i)
-		 / np.linalg.norm(b_i))
-		
-		if(psi > best_psi):
-			best_b_i = b_i
-			best_psi = psi
-			print psi
-			print args_sort[k]
-	B_out[:, i] = best_b_i
-
-			return B_out
-
-'''
-
-'''
-B_out = np.random.randint(2, size=(64, X.shape[1]))
-RX = R.T.dot(X)
-for i in range(X.shape[1]):
-	args_sort = np.argsort(RX[:, i].T)
-	args_sort = args_sort[::-1]
-	best_psi = -1 * np.inf
-	#if(i% 10000==0):
-		#print("at optmizing binary_v {}".format(i))
-	for k in range(64):
-		if(RX[args_sort[k], i] == 0):
-			break
-		b_i = np.zeros((1, 64))
-		b_i[:, args_sort[:k+1]] = 1
-		psi = RX[:, i].T.dot(np.squeeze(b_i)
-		 / np.linalg.norm(b_i))
-		if(psi > best_psi):
-			best_b_i = b_i
-			best_psi = psi
-	B_out[:, i] = best_b_i
-'''
