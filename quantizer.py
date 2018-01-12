@@ -1,7 +1,6 @@
 import numpy as np
 import numpy.matlib as npmat
 import scipy.io as sio
-import pdb
 
 class AQBC:
 	def __init__(self, X, nbits, epochs):
